@@ -1,5 +1,7 @@
 import { framer, CanvasNode } from "framer-plugin"
 import { useState, useEffect } from "react"
+import { LoginModal } from "./components/LoginModal"
+
 import "./App.css"
 
 framer.showUI({
@@ -17,7 +19,10 @@ function useSelection() {
 
     return selection
 }
-
+/*
+ * @framerSupportedLayoutWidth auto
+ * @framerSupportedLayoutHeight auto
+ */
 export function App() {
     const selection = useSelection()
     const layer = selection.length === 1 ? "layer" : "layers"
@@ -31,7 +36,7 @@ export function App() {
 
     return (
         <main>
-            <p>
+            {/* <p>
                 Welcome! Check out the{" "}
                 <a href="https://framer.com/developers/plugins/introduction" target="_blank">
                     Docs
@@ -40,7 +45,10 @@ export function App() {
             </p>
             <button className="framer-button-primary" onClick={handleAddSvg}>
                 Insert Logo
-            </button>
+            </button> */}
+            <div className="min-h-screen">
+                <LoginModal/>
+            </div>
         </main>
     )
 }
