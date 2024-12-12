@@ -1,0 +1,40 @@
+[
+  {
+    "Title": "Sections",
+    "SubCategories": [
+      "property-detail",
+      "pricing-table",
+      "newsletter",
+      "digital-product-detail",
+      "digital-product",
+      "blog",
+      "hero",
+      "about",
+      "testimonial",
+      "service",
+      "portfolio",
+      "pricing",
+      "blog-detail",
+      "career-detail",
+      "changelog-detail",
+      "changelog",
+      "team-detail",
+      "portfolio-detail",
+      "tab",
+      "cta",
+      "navigation",
+      "404",
+      "contact",
+      "client-logo",
+      "career",
+      "top-bar",
+      "footer",
+      "feature",
+      "contact",
+      "team",
+      "service",
+      "faq",
+      "about"
+    ]
+  }
+]

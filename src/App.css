@@ -7,7 +7,32 @@ main {
     display: flex;
     flex-direction: column;
     align-items: start;
-    padding: 0 15px 15px 15px;
+    padding: 0 8px 8px 8px;
     height: 100%;
     gap: 15px;
+}
+
+#root {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+secondary-background {
+    background: var(--framer-color-bg-secondary);
+}
+
+.framer-border {
+    border-color: var(--framer-color-bg-tertiary);
+}
+
+.framer-bg {
+    background-color: var(--framer-color-bg);
+}
+
+.framer-color-text {
+    color: var(--framer-color-text);
+}
+
+.framer-hover:hover {
+    background-color: var(--framer-color-bg-tertiary);
 }
