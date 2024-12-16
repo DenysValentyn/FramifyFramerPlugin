@@ -117,13 +117,21 @@ export function App() {
                 Insert Logo
             </button> */}
       <div className="min-h-screen">
-        {/* <LoginModal/> */}
-        <SearchBar setSearchKey={setSearchKey} />
-        <FilterSection
-          setCategory={setCategory}
-          subCategories={subCategories}
-        />
-        <ComponentGrid data={data} />
+        <div className="fixed top-0 z-10 framer-bg">
+          <div className="flex flex-col justify-between pb-2.5 border-b border-solid framer-border">
+            <SearchBar setSearchKey={setSearchKey} />
+            <FilterSection
+              setCategory={setCategory}
+              subCategories={subCategories}
+            />
+          </div>
+        </div>
+
+        <div style={{ paddingTop: "90px" }}>
+          {" "}
+          {/* Adjust padding based on the height of the fixed section */}
+          <ComponentGrid data={data} />
+        </div>
       </div>
     </main>
   );
