@@ -29,28 +29,38 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchKey, category }) => {
           />
         </div>
         <button
-          className="border border-solid secondary-background framer-secondary-border rounded-[4px] flex justify-center items-center w-8 h-8 transition-transform duration-300"
+          className={`relative border border-solid secondary-background framer-secondary-border rounded-[4px] flex justify-center items-center w-8 h-8 overflow-hidden transition-transform duration-300`}
           onClick={toggleDropdown}
         >
-          {isDropdownOpen ? (
-            <X className="w-[20px]" />
-          ) : (
-            <Menu className="w-[20px]" />
-          )}{" "}
-          {/* Change icon based on state */}
+          <X
+            className={`absolute transition-transform duration-500 w-[15px] ${
+              isDropdownOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"
+            }`}
+            style={{ width: "20px", height: "100%" }} // Ensures full width and height
+          />
+          <Menu
+            className={`absolute transition-transform duration-500 ${
+              isDropdownOpen ? "scale-0 opacity-0" : "scale-100 opacity-100"
+            }`}
+            style={{ width: "20px", height: "100%" }} // Ensures full width and height
+          />
         </button>
       </div>
 
+      <div
+        className={`absolute h-fit right-0 z-10 w-48 shadow-lg framer-bg framer-bg framer-border rounded mt-1 transition-all duration-250 ease-in-out transform ${
+          isDropdownOpen
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-2"
+        }`}
+      >
+        <ul className="py-2">
+          <li className="px-4 py-2 cursor-pointer framer-hover">Option 1</li>
+          <li className="px-4 py-2 cursor-pointer framer-hover">Option 2</li>
+          <li className="px-4 py-2 cursor-pointer framer-hover">Option 3</li>
+        </ul>
+      </div>
       {/* Dropdown Menu */}
-      {isDropdownOpen && (
-        <div className="absolute right-0 z-10 w-48 mt-2 border rounded shadow-lg framer-bg framer-border">
-          <ul className="py-2">
-            <li className="px-4 py-2 cursor-pointer framer-hover">Option 1</li>
-            <li className="px-4 py-2 cursor-pointer framer-hover">Option 2</li>
-            <li className="px-4 py-2 cursor-pointer framer-hover">Option 3</li>
-          </ul>
-        </div>
-      )}
     </div>
   );
 };

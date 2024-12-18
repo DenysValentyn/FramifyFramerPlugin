@@ -95,7 +95,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 
           {/* Dropdown for Sections */}
           <div
-            className={`absolute h-[250px] h-fit  framer-bg framer-border rounded mt-1 z-10 shadow-md transition-all duration-250 ease-in-out transform ${
+            className={`absolute h-fit  framer-bg framer-border rounded mt-1 z-10 shadow-md transition-all duration-250 ease-in-out transform ${
               isFitlerOpen
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 -translate-y-2"
@@ -131,7 +131,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
           </button>
           {/* Dropdown for Sections */}
           <div
-            className={`absolute h-[250px] overflow-y-scroll framer-bg framer-border rounded mt-1 z-10 shadow-md transition-all duration-250 ease-in-out transform ${
+            className={`absolute h-[160px] overflow-y-scroll framer-bg framer-border rounded mt-1 z-10 shadow-md transition-all duration-250 ease-in-out transform ${
               isSectionsOpen
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 -translate-y-2"
