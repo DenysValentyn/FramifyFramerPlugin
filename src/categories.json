@@ -21,17 +21,45 @@
       "hero",
       "navigation",
       "newsletter",
+      "property-detail",
       "portfolio",
       "portfolio-detail",
       "pricing",
       "pricing-table",
+      "privacy-policy",
       "service",
-      "service",
+      "stats",
       "tab",
       "team",
       "team-detail",
       "testimonial",
       "top-bar"
+    ]
+  },
+  {
+    "Title": "Websites",
+    "SubCategories": ["Agency", "Documentation", "Membership"]
+  },
+  {
+    "Title": "Components",
+    "SubCategories": [
+      "accordion",
+      "breadcrumbs",
+      "cards-career",
+      "cards-feature",
+      "cards-faq",
+      "cards-info",
+      "cards-portfolio",
+      "cards-pricing",
+      "cards-service",
+      "cards-stats",
+      "cards-team",
+      "cards-testimonial",
+      "cards-timeline",
+      "mega-menu",
+      "search-bar",
+      "tabs",
+      "toggle"
     ]
   }
 ]

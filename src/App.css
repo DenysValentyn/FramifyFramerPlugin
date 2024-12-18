@@ -17,12 +17,16 @@ main {
     scrollbar-width: none;
 }
 
-secondary-background {
-    background: var(--framer-color-bg-secondary);
+.secondary-background {
+    background: var(--framer-color-bg-tertiary);
 }
 
 .framer-border {
     border-color: var(--framer-color-bg-tertiary);
+}
+
+.framer-secondary-border {
+    border-color: var(--framer-color-bg-secondary);
 }
 
 .framer-bg {

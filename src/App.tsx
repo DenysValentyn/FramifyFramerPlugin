@@ -1,11 +1,11 @@
-import { framer, CanvasNode } from "framer-plugin";
+import { framer } from "framer-plugin";
 import { useState, useEffect } from "react";
 import { LoginModal } from "./components/LoginModal";
 import SearchBar from "./components/SearchBar";
 import FilterSection from "./components/FilterSection";
 import ComponentGrid from "./components/ComponentGrid";
-import jsonData from "./sections.json";
 import categoriesData from "./categories.json";
+import jsonData from "./sections.json";
 import "./App.css";
 
 framer.showUI({
@@ -35,51 +35,38 @@ export interface SubCategory {
   SubCategories: Array<string>;
 }
 
+interface JsonData {
+  Sections: Section[];
+  Websites: Section[];
+  Components: Section[];
+}
+
+export type CategoryKey = keyof JsonData;
+
 export function App() {
   const [data, setData] = useState<Section[]>([]);
-  const [categories, setCategories] = useState<SubCategory[]>([]);
   const [subCategories, setSubCategories] = useState<string[]>([]);
   const [searchKey, setSearchKey] = useState<string>("");
-  const [category, setCategory] = useState<string>("Sections");
-  const [filter, setFilter] = useState<string>("Sections");
+  const [category, setCategory] = useState<CategoryKey>("Sections");
+  const [subCategory, setSubCategory] = useState<string>("404");
+  const allData = jsonData as JsonData;
 
   useEffect(() => {
-    setData(jsonData);
-    setCategories(categoriesData);
+    setData(allData["Sections"]);
+    // setCategories(categoriesData);
   }, []);
 
   useEffect(() => {
-    if (filter !== "") {
-      categories.map((data) => {
-        if (data.Title === category) {
-          return setSubCategories(data.SubCategories);
-        }
-      });
-    }
-  }, [categories]);
-
-  useEffect(() => {
-    if (filter !== "") {
-      categoriesData.map((data) => {
-        if (data.Title === category) {
-          setSubCategories(data.SubCategories);
-        }
-      });
-    }
-  }, [filter]);
-
-  useEffect(() => {
-    console.log(searchKey);
-    if (jsonData.length) {
+    if (allData.hasOwnProperty(category) && Array.isArray(allData[category])) {
       if (searchKey !== "") {
-        const results = jsonData
+        const results = allData[category]
           .filter((item) =>
             item.Name.toLowerCase().includes(searchKey.toLowerCase())
           )
           .sort();
         setData(results);
       } else {
-        let filteredData = jsonData
+        let filteredData = allData[category]
           .filter((data) => {
             return data.SectionsCategory === category;
           })
@@ -92,12 +79,28 @@ export function App() {
   }, [searchKey]);
 
   useEffect(() => {
-    if (jsonData.length) {
-      let filteredData = jsonData
+    if (allData.hasOwnProperty(category) && Array.isArray(allData[category])) {
+      let filteredData = allData[category]
         .filter((data) => {
-          return data.SectionsCategory === category;
+          return data.SectionsCategory === subCategory;
         })
         .sort();
+      console.log(filteredData);
+      if (filteredData.length) {
+        setData(filteredData);
+      }
+    }
+  }, [subCategory]);
+
+  useEffect(() => {
+    categoriesData.map((data) => {
+      if (data.Title === category) {
+        setSubCategories(data.SubCategories);
+      }
+    });
+
+    if (allData.hasOwnProperty(category) && Array.isArray(allData[category])) {
+      let filteredData = allData[category];
       if (filteredData.length) {
         setData(filteredData);
       }
@@ -119,9 +122,10 @@ export function App() {
       <div className="min-h-screen">
         <div className="fixed top-0 z-10 framer-bg">
           <div className="flex flex-col justify-between pb-2.5 border-b border-solid framer-border">
-            <SearchBar setSearchKey={setSearchKey} />
+            <SearchBar setSearchKey={setSearchKey} category={category} />
             <FilterSection
               setCategory={setCategory}
+              setSubCategory={setSubCategory}
               subCategories={subCategories}
             />
           </div>
@@ -129,8 +133,7 @@ export function App() {
 
         <div style={{ paddingTop: "90px" }}>
           {" "}
-          {/* Adjust padding based on the height of the fixed section */}
-          <ComponentGrid data={data} />
+          <ComponentGrid data={data} category={category} />
         </div>
       </div>
     </main>

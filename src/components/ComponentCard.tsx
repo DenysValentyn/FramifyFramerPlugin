@@ -22,7 +22,7 @@ const ComponentCard = ({ image, url, title }: ComponentCardProps) => {
             <img
               src={image}
               alt="Component Preview"
-              className="w-full aspect-video object-cover rounded-[10px] p-[5px]"
+              className="w-full aspect-video object-contain rounded-[10px] p-[5px]"
             />
             <div className="absolute inset-0 transition-all duration-200 bg-black bg-opacity-0 rounded-lg group-hover:bg-opacity-5" />
           </div>

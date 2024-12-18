@@ -1,13 +1,16 @@
-import React, { useState, useEffect, useRef, ChangeEvent } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Columns2, LayoutGrid, PanelsTopLeft, ChevronDown } from "lucide-react";
+import { CategoryKey } from "../App";
 
 interface FilterSectionProps {
   subCategories: string[];
-  setCategory: (category: string) => void;
+  setCategory: (category: CategoryKey) => void;
+  setSubCategory: (category: string) => void;
 }
 // Define a functional component
 const FilterSection: React.FC<FilterSectionProps> = ({
   subCategories,
+  setSubCategory,
   setCategory,
 }) => {
   const [isSectionsOpen, setSectionsOpen] = useState<boolean>(false);
@@ -15,9 +18,18 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   const [selectedfilter, setFilterCaption] = useState<string>("Sections");
   const [slectedCategory, setSelectedCategory] =
     useState<string>("Select Subcategory");
-  useState<string>("Select Subcategory");
   const sectionsRef = useRef<HTMLDivElement | null>(null);
+  const FilterCategories: CategoryKey[] = [
+    "Sections",
+    "Components",
+    "Websites",
+  ];
 
+  const iconMapping: { [key: string]: JSX.Element } = {
+    Sections: <Columns2 className="w-3 h-4 mr-2" />,
+    Components: <LayoutGrid className="w-3 h-4 mr-2" />,
+    Websites: <PanelsTopLeft className="w-3 h-4 mr-2" />,
+  };
   // Close dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent): void => {
@@ -35,12 +47,28 @@ const FilterSection: React.FC<FilterSectionProps> = ({
     };
   }, []);
 
+  useEffect(() => {
+    if (subCategories.length) {
+      setSubCategory(subCategories[0]);
+      setSelectedCategory(
+        subCategories[0]
+          .replace(/-/g, " ")
+          .replace(/\b\w/g, (char) => char.toUpperCase())
+      );
+    }
+  }, [subCategories]);
+
   const handleSubcategoryClick = (category: string) => {
-    setCategory(category);
+    setSubCategory(category);
     setSelectedCategory(
       category.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())
     );
     setSectionsOpen(false); // Close dropdown after selection
+  };
+
+  const handleCategoryClick = (category: CategoryKey) => {
+    setCategory(category);
+    setFilterCaption(category);
   };
 
   return (
@@ -48,17 +76,20 @@ const FilterSection: React.FC<FilterSectionProps> = ({
       <div className="flex">
         {/* Dropdown for Sections */}
         <div
-          className="relative w-[120px]  h-[31px]"
+          className="relative w-[175px]  h-[31px]"
           onClick={() => {
             setFilterOpen(!isFitlerOpen);
             setSectionsOpen(false);
           }}
         >
           <button
-            className={`flex w-[120px] justify-between items-center px-2.5 h-[31px] mr-[5px] transition-all duration-250 ease-in-out transform border border-solid framer-border framer-bg rounded-[4px] hover:bg-transparent active:bg-transparent focus:bg-transparent 
+            className={`flex w-[175px] secondary-background justify-between items-center px-2.5 h-[31px] mr-[5px] transition-all duration-250 ease-in-out transform border border-solid framer-secondary-border rounded-[4px]
             }`}
           >
-            {selectedfilter}
+            <div className="flex px-2 py-2">
+              {iconMapping[selectedfilter]}
+              {selectedfilter}
+            </div>
             <ChevronDown className="w-[12px]"></ChevronDown>
           </button>
 
@@ -70,25 +101,29 @@ const FilterSection: React.FC<FilterSectionProps> = ({
                 : "opacity-0 -translate-y-2"
             }`}
           >
-            <ul className="w-[120px] py-2 h-fit">
-              <li
-                className="flex px-4 py-2 cursor-pointer framer-hover"
-                onClick={() => handleSubcategoryClick("test")}
-              >
-                <span className="text-2.5">test</span>
-              </li>
+            <ul className="w-[175px] py-2 h-fit">
+              {FilterCategories.map((item, index) => (
+                <li
+                  key={index}
+                  className="flex px-4 py-2 cursor-pointer framer-hover"
+                  onClick={() => handleCategoryClick(item)}
+                >
+                  {iconMapping[item]}
+                  <span className="text-2.5">{item}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
         <div
-          className="relative w-[209px] pl-2.5 h-[31px]"
+          className="relative w-[159px] pl-2.5 h-[31px]"
           onClick={() => {
             setSectionsOpen(!isSectionsOpen);
             setFilterOpen(false);
           }}
         >
           <button
-            className={`flex justify-between items-center border framer-border w-[209] px-2.5 h-[31px] mr-[5px] transition-all duration-250 ease-in-out transform border border-solid  framer-bg rounded-[4px] hover:bg-transparent active:bg-transparent focus:bg-transparent 
+            className={`flex justify-between items-center border framer-secondary-border px-2.5 h-[31px] mr-[5px] transition-all duration-250 ease-in-out transform border border-solid secondary-background rounded-[4px] 
             }}`}
           >
             {slectedCategory}
@@ -106,7 +141,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
             }}
           >
             <ul
-              className={`w-[189px] py-2 ${
+              className={`py-2 w-[148px] ${
                 isSectionsOpen ? "block" : "hidden"
               }`}
             >
