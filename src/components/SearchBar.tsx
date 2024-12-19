@@ -48,10 +48,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchKey, category }) => {
       </div>
 
       <div
-        className={`absolute h-fit right-0 z-10 w-48 shadow-lg framer-bg framer-bg framer-border rounded mt-1 transition-all duration-250 ease-in-out transform ${
-          isDropdownOpen
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 -translate-y-2"
+        className={`absolute h-fit animblock right-0 z-10 w-48 shadow-lg framer-bg framer-bg framer-border rounded mt-1 ${
+          isDropdownOpen ? "open" : ""
         }`}
       >
         <ul className="py-2">

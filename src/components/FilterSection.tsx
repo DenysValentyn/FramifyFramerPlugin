@@ -14,11 +14,12 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   setCategory,
 }) => {
   const [isSectionsOpen, setSectionsOpen] = useState<boolean>(false);
-  const [isFitlerOpen, setFilterOpen] = useState<boolean>(false);
+  const [isFilterOpen, setFilterOpen] = useState<boolean>(false);
   const [selectedfilter, setFilterCaption] = useState<string>("Sections");
   const [slectedCategory, setSelectedCategory] =
     useState<string>("Select Subcategory");
   const sectionsRef = useRef<HTMLDivElement | null>(null);
+  const filterRef = useRef<HTMLDivElement | null>(null);
   const FilterCategories: CategoryKey[] = [
     "Sections",
     "Components",
@@ -26,9 +27,9 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   ];
 
   const iconMapping: { [key: string]: JSX.Element } = {
-    Sections: <Columns2 className="w-3 h-4 mr-2" />,
-    Components: <LayoutGrid className="w-3 h-4 mr-2" />,
-    Websites: <PanelsTopLeft className="w-3 h-4 mr-2" />,
+    Sections: <Columns2 className="w-3 h-4 mr-[5px]" />,
+    Components: <LayoutGrid className="w-3 h-4 mr-[5px]" />,
+    Websites: <PanelsTopLeft className="w-3 h-4 mr-[5px]" />,
   };
   // Close dropdowns on outside click
   useEffect(() => {
@@ -63,6 +64,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
     setSelectedCategory(
       category.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())
     );
+    setFilterOpen(true);
     setSectionsOpen(false); // Close dropdown after selection
   };
 
@@ -76,14 +78,14 @@ const FilterSection: React.FC<FilterSectionProps> = ({
       <div className="flex">
         {/* Dropdown for Sections */}
         <div
-          className="relative w-[175px]  h-[31px]"
+          className="relative w-[130]  h-[31px]"
           onClick={() => {
-            setFilterOpen(!isFitlerOpen);
+            setFilterOpen(!isFilterOpen);
             setSectionsOpen(false);
           }}
         >
           <button
-            className={`flex w-[175px] secondary-background justify-between items-center px-2.5 h-[31px] mr-[5px] transition-all duration-250 ease-in-out transform border border-solid framer-secondary-border rounded-[4px]
+            className={`flex w-[130px] secondary-background justify-between items-center pr-2.5 h-[31px] mr-[8px] transition-all duration-250 ease-in-out transform border border-solid framer-secondary-border rounded-[4px]
             }`}
           >
             <div className="flex px-2 py-2">
@@ -95,17 +97,16 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 
           {/* Dropdown for Sections */}
           <div
-            className={`absolute h-fit  framer-bg framer-border rounded mt-1 z-10 shadow-md transition-all duration-250 ease-in-out transform ${
-              isFitlerOpen
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-2"
-            }`}
+            className={`absolute h-fit animblock framer-bg framer-border rounded mt-1 z-10 shadow-md ${
+              isFilterOpen ? "open" : ""
+            } `}
+            ref={filterRef}
           >
-            <ul className="w-[175px] py-2 h-fit">
+            <ul className="w-[130px] py-2 h-fit">
               {FilterCategories.map((item, index) => (
                 <li
                   key={index}
-                  className="flex px-4 py-2 cursor-pointer framer-hover"
+                  className="flex px-2 py-2 cursor-pointer framer-hover"
                   onClick={() => handleCategoryClick(item)}
                 >
                   {iconMapping[item]}
@@ -116,39 +117,33 @@ const FilterSection: React.FC<FilterSectionProps> = ({
           </div>
         </div>
         <div
-          className="relative w-[159px] pl-2.5 h-[31px]"
+          className="relative w-[204px] h-[31px]"
           onClick={() => {
-            setSectionsOpen(!isSectionsOpen);
             setFilterOpen(false);
+            setSectionsOpen(!isSectionsOpen);
           }}
         >
           <button
-            className={`flex justify-between items-center border framer-secondary-border px-2.5 h-[31px] mr-[5px] transition-all duration-250 ease-in-out transform border border-solid secondary-background rounded-[4px] 
+            className={`flex justify-between items-center framer-secondary-border px-2.5 h-[31px] mr-[5px] transition-all duration-250 ease-in-out transform border border-solid secondary-background rounded-[4px] 
             }}`}
           >
             {slectedCategory}
             <ChevronDown className="w-[12px]"></ChevronDown>
           </button>
-          {/* Dropdown for Sections */}
+          {/* Dropdown for subcategories */}
           <div
-            className={`absolute h-[160px] overflow-y-scroll framer-bg framer-border rounded mt-1 z-10 shadow-md transition-all duration-250 ease-in-out transform ${
-              isSectionsOpen
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-2"
+            className={`absolute h-[194px] animblock overflow-y-scroll framer-bg framer-border rounded mt-1 z-10 shadow-md ${
+              isSectionsOpen ? "open" : ""
             }`}
             style={{
               scrollbarWidth: "none",
             }}
           >
-            <ul
-              className={`py-2 w-[148px] ${
-                isSectionsOpen ? "block" : "hidden"
-              }`}
-            >
+            <ul className={`py-2 w-[194px] `}>
               {subCategories.map((category, index) => (
                 <li
                   key={index}
-                  className="flex px-4 py-2 cursor-pointer framer-hover"
+                  className="flex px-2.5 py-2 cursor-pointer framer-hover"
                   onClick={() => handleSubcategoryClick(category)}
                 >
                   <span className="text-2.5">
