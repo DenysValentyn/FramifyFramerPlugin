@@ -8,7 +8,7 @@ interface ComponentGridProps {
 }
 const ComponentGrid = ({ data, category }: ComponentGridProps) => {
   return (
-    <div className="grid grid-cols-1 pb-3">
+    <div className="flex flex-col pb-3">
       {category === "Websites"
         ? data.map((item, index) => (
             <RemixCard

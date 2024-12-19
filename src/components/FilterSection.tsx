@@ -117,7 +117,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
           </div>
         </div>
         <div
-          className="relative w-[204px] h-[31px]"
+          className="relative w-[194px] h-[31px]"
           onClick={() => {
             setFilterOpen(false);
             setSectionsOpen(!isSectionsOpen);
