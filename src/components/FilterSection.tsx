@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Columns2, LayoutGrid, PanelsTopLeft, ChevronDown } from "lucide-react";
+import {
+  Columns2,
+  LayoutGrid,
+  PanelsTopLeft,
+  ChevronDown,
+  LayersIcon,
+} from "lucide-react";
 import { CategoryKey } from "../App";
 
 interface FilterSectionProps {
@@ -24,12 +30,14 @@ const FilterSection: React.FC<FilterSectionProps> = ({
     "Sections",
     "Components",
     "Websites",
+    "StarterPages",
   ];
 
   const iconMapping: { [key: string]: JSX.Element } = {
     Sections: <Columns2 className="w-3 h-4 mr-[5px]" />,
     Components: <LayoutGrid className="w-3 h-4 mr-[5px]" />,
     Websites: <PanelsTopLeft className="w-3 h-4 mr-[5px]" />,
+    StarterPages: <LayersIcon className="w-3 h-4 mr-[5px]" />,
   };
   // Close dropdowns on outside click
   useEffect(() => {
@@ -50,12 +58,14 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 
   useEffect(() => {
     if (subCategories.length) {
-      setSubCategory(subCategories[0]);
-      setSelectedCategory(
-        subCategories[0]
-          .replace(/-/g, " ")
-          .replace(/\b\w/g, (char) => char.toUpperCase())
-      );
+      setSubCategory("");
+      setSelectedCategory("All");
+      // setSubCategory(subCategories[0]);
+      // setSelectedCategory(
+      //   subCategories[0]
+      //     .replace(/-/g, " ")
+      //     .replace(/\b\w/g, (char) => char.toUpperCase())
+      // );
     }
   }, [subCategories]);
 

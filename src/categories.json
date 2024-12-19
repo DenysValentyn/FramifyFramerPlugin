@@ -61,5 +61,20 @@
       "tabs",
       "toggle"
     ]
+  },
+  {
+    "Title": "StarterPages",
+    "SubCategories": [
+      "About",
+      "Contact",
+      "FAQ",
+      "Feature",
+      "Home",
+      "Portfolio",
+      "Pricing",
+      "Service",
+      "Team",
+      "Testimonial"
+    ]
   }
 ]

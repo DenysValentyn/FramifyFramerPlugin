@@ -39,6 +39,7 @@ interface JsonData {
   Sections: Section[];
   Websites: Section[];
   Components: Section[];
+  StarterPages: Section[];
 }
 
 export type CategoryKey = keyof JsonData;
