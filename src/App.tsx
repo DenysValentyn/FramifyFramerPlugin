@@ -80,12 +80,18 @@ export function App() {
   }, [searchKey]);
 
   useEffect(() => {
+    console.log("this is subcategory", subCategory);
     if (allData.hasOwnProperty(category) && Array.isArray(allData[category])) {
-      let filteredData = allData[category]
-        .filter((data) => {
-          return data.SectionsCategory === subCategory;
-        })
-        .sort();
+      let filteredData = [];
+      if (subCategory === "") {
+        filteredData = allData[category];
+      } else {
+        filteredData = allData[category]
+          .filter((data) => {
+            return data.SectionsCategory === subCategory;
+          })
+          .sort();
+      }
       console.log(filteredData);
       if (filteredData.length) {
         setData(filteredData);
