@@ -80,7 +80,6 @@ export function App() {
   }, [searchKey]);
 
   useEffect(() => {
-    console.log("this is subcategory", subCategory);
     if (allData.hasOwnProperty(category) && Array.isArray(allData[category])) {
       let filteredData = [];
       if (subCategory === "") {

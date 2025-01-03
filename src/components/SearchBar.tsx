@@ -29,7 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchKey, category }) => {
           />
         </div>
         <button
-          className={`relative border border-solid secondary-background framer-secondary-border rounded-[4px] flex justify-center items-center w-8 h-8 overflow-hidden transition-transform duration-300`}
+          className={`relative border border-solid secondary-background framer-secondary-border rounded-[6px] flex justify-center items-center w-8 h-8 overflow-hidden transition-transform duration-300`}
           onClick={toggleDropdown}
         >
           <X

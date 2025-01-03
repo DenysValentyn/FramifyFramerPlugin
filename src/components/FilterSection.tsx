@@ -95,7 +95,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
           }}
         >
           <button
-            className={`flex w-[130px] secondary-background justify-between items-center pr-2.5 h-[31px] mr-[8px] transition-all duration-250 ease-in-out transform border border-solid framer-secondary-border rounded-[4px]
+            className={`flex w-[130px] secondary-background justify-between items-center pr-2.5 h-[31px] mr-[8px] transition-all duration-250 ease-in-out transform border border-solid framer-secondary-border rounded-[6px]
             }`}
           >
             <div className="flex px-2 py-2">
@@ -107,7 +107,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
 
           {/* Dropdown for Sections */}
           <div
-            className={`absolute h-fit animblock framer-bg framer-border rounded mt-1 z-10 shadow-md ${
+            className={`absolute h-fit animblock framer-bg framer-border rounded-[6px] mt-1 z-10 shadow-md ${
               isFilterOpen ? "open" : ""
             } `}
             ref={filterRef}
@@ -134,7 +134,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
           }}
         >
           <button
-            className={`flex justify-between items-center framer-secondary-border px-2.5 h-[31px] mr-[5px] transition-all duration-250 ease-in-out transform border border-solid secondary-background rounded-[4px] 
+            className={`flex justify-between items-center framer-secondary-border px-2.5 h-[31px] mr-[5px] transition-all duration-250 ease-in-out transform border border-solid secondary-background rounded-[6px] 
             }}`}
           >
             {slectedCategory}
