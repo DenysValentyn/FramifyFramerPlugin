@@ -126,7 +126,7 @@ export function App() {
                 Insert Logo
             </button> */}
       <div className="min-h-screen">
-        <div className="fixed top-0 z-10 framer-bg">
+        {/* <div className="fixed top-0 z-10 framer-bg">
           <div className="flex flex-col justify-between pb-2.5 border-b border-solid framer-border">
             <SearchBar setSearchKey={setSearchKey} category={category} />
             <FilterSection
@@ -140,7 +140,8 @@ export function App() {
         <div style={{ paddingTop: "90px" }}>
           {" "}
           <ComponentGrid data={data} category={category} />
-        </div>
+        </div> */}
+        <LoginModal/>
       </div>
     </main>
   );
