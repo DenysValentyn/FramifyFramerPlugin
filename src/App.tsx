@@ -50,6 +50,7 @@ export function App() {
   const [searchKey, setSearchKey] = useState<string>("");
   const [category, setCategory] = useState<CategoryKey>("Sections");
   const [subCategory, setSubCategory] = useState<string>("404");
+  const [valid, setValid] = useState<boolean>(false);
   const allData = jsonData as JsonData;
 
   useEffect(() => {
@@ -126,22 +127,27 @@ export function App() {
                 Insert Logo
             </button> */}
       <div className="min-h-screen">
-        {/* <div className="fixed top-0 z-10 framer-bg">
-          <div className="flex flex-col justify-between pb-2.5 border-b border-solid framer-border">
-            <SearchBar setSearchKey={setSearchKey} category={category} />
-            <FilterSection
-              setCategory={setCategory}
-              setSubCategory={setSubCategory}
-              subCategories={subCategories}
-            />
-          </div>
-        </div>
+        {valid ? (
+          <>
+            <div className="fixed top-0 z-10 framer-bg">
+              <div className="flex flex-col justify-between pb-2.5 border-b border-solid framer-border">
+                <SearchBar setSearchKey={setSearchKey} category={category} />
+                <FilterSection
+                  setCategory={setCategory}
+                  setSubCategory={setSubCategory}
+                  subCategories={subCategories}
+                />
+              </div>
+            </div>
 
-        <div style={{ paddingTop: "90px" }}>
-          {" "}
-          <ComponentGrid data={data} category={category} />
-        </div> */}
-        <LoginModal/>
+            <div style={{ paddingTop: "90px" }}>
+              {" "}
+              <ComponentGrid data={data} category={category} />
+            </div>
+          </>
+        ) : (
+          <LoginModal setValid={setValid} />
+        )}
       </div>
     </main>
   );
