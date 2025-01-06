@@ -1,11 +1,21 @@
 import { Search, Menu, X } from "lucide-react"; // Import X for the close icon
 import { ChangeEvent } from "react";
+import { House, LogOut, Settings, Headset, ShoppingBag } from "lucide-react";
 import { useAppContext } from "../AppContext";
 
 interface SearchBarProps {
   category: string;
   setSearchKey: (searchKey: string) => void;
 }
+
+const iconMapping: { [key: string]: JSX.Element } = {
+  VisitWebsite: <House className="w-3 h-4 mr-[5px]" />,
+  AccountDetails: <Settings className="w-3 h-4 mr-[5px]" />,
+  CustomerSupport: <Headset className="w-3 h-4 mr-[5px]" />,
+  DealsDiscounts: <ShoppingBag className="w-3 h-4 mr-[5px]" />,
+  Logout: <LogOut className="w-3 h-4 mr-[5px]" />,
+};
+
 const SearchBar: React.FC<SearchBarProps> = ({ setSearchKey, category }) => {
   const { isMenuOpen, setMenuOpen, setFilterOpen, setSectionsOpen } =
     useAppContext();
@@ -18,6 +28,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchKey, category }) => {
 
   const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchKey(e.target.value);
+  };
+
+  const itemClicked = () => {
+    setMenuOpen(false);
+  };
+
+  const handleSignOut = () => {
+    setMenuOpen(false);
+    localStorage.removeItem("loginData");
   };
 
   return (
@@ -50,16 +69,58 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchKey, category }) => {
           />
         </button>
       </div>
-
       <div
         className={`absolute h-fit animblock right-0 z-10 w-48 shadow-lg framer-bg framer-bg framer-border rounded mt-1 ${
           isMenuOpen ? "open" : ""
         }`}
       >
-        <ul className="py-2">
-          <li className="px-4 py-2 cursor-pointer framer-hover">Option 1</li>
-          <li className="px-4 py-2 cursor-pointer framer-hover">Option 2</li>
-          <li className="px-4 py-2 cursor-pointer framer-hover">Option 3</li>
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              className="flex m-[3px] rounded-[5px] px-2 py-2 cursor-pointer framer-hover"
+              href="https://framify.design/"
+              onClick={itemClicked}
+            >
+              {iconMapping["VisitWebsite"]} Visit Website
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              className="flex m-[3px] rounded-[5px] px-2 py-2 cursor-pointer framer-hover"
+              href="https://framify.design/my-account/account-details"
+              onClick={itemClicked}
+            >
+              {iconMapping["AccountDetails"]} Account Details
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              className="flex m-[3px] rounded-[5px] px-2 py-2 cursor-pointer framer-hover"
+              href="https://framify.design/my-account/customer-support"
+              onClick={itemClicked}
+            >
+              {iconMapping["CustomerSupport"]} Customer Support
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              className="flex m-[3px] rounded-[5px] px-2 py-2 cursor-pointer framer-hover"
+              href="https://framify.design/my-account/deals-discounts"
+              onClick={itemClicked}
+            >
+              {iconMapping["DealsDiscounts"]} Deals & Discounts
+            </a>
+          </li>
+          <li
+            className="flex m-[3px] rounded-[5px] px-2 py-2 cursor-pointer framer-hover"
+            onClick={handleSignOut}
+          >
+            {iconMapping["Logout"]} Sign Out
+          </li>
         </ul>
       </div>
       {/* Dropdown Menu */}

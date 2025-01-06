@@ -38,12 +38,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({ setValid }) => {
     return data ? JSON.parse(data) : null;
   };
 
-  // Clear login data from localStorage
-  const clearLoginData = () => {
-    localStorage.removeItem("userName");
-    localStorage.removeItem("licenseKey");
-  };
-
   useEffect(() => {
     const loginData = getLoginData();
     if (loginData) {
@@ -65,7 +59,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({ setValid }) => {
           CONFIG
         )
         .then((response) => {
-          console.log(response);
           if (response.data.valid) {
             const customerName = response.data.meta.customer_name;
             const customerEmail = response.data.meta.customer_email;
@@ -83,10 +76,13 @@ export const LoginModal: React.FC<LoginModalProps> = ({ setValid }) => {
         })
         .catch((err) => {
           console.log(err);
+          setError(err.response.data.error);
         })
         .finally(() => {
           setIsLoading(false);
         });
+    } else {
+      setError("Please input Email address and License Key.");
     }
   };
 
@@ -101,7 +97,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ setValid }) => {
           <div className="text-center">
             <h2 className="text-2xl font-bold pb-2.5">Welcome to Framify</h2>
             <p className="text-[14px] font-medium">
-              Drag & Drop from Over 780+ Premium Framer Assets
+              Drag & Drop to create beautiful Framer Websites in No-Time
             </p>
           </div>
 
@@ -148,10 +144,11 @@ export const LoginModal: React.FC<LoginModalProps> = ({ setValid }) => {
             <p className="text-gray-600 text-[12px] pb-2.5">
               Don't have an Account?{" "}
               <a
-                href="#"
-                className="text-[#632DE9] hover:text-purple-700 font-medium underline"
+                href="https://framify.design/docs/find-your-license-key"
+                className="font-medium underline"
+                target="_blank"
               >
-                Activate License Key
+                Find Your License Key
               </a>
             </p>
           </div>
