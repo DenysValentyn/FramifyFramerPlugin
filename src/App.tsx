@@ -74,6 +74,9 @@ export function App() {
             return data.SectionsCategory === category;
           })
           .sort();
+        filteredData.sort((a, b) => {
+          return a.Name.localeCompare(b.Name);
+        });
         if (filteredData.length) {
           setData(filteredData);
         }
@@ -92,6 +95,10 @@ export function App() {
             return data.SectionsCategory === subCategory;
           })
           .sort();
+        // Sort the filteredData by Name
+        filteredData.sort((a, b) => {
+          return a.Name.localeCompare(b.Name);
+        });
       }
       console.log(filteredData);
       if (filteredData.length) {
@@ -109,6 +116,9 @@ export function App() {
 
     if (allData.hasOwnProperty(category) && Array.isArray(allData[category])) {
       let filteredData = allData[category];
+      filteredData.sort((a, b) => {
+        return a.Name.localeCompare(b.Name);
+      });
       if (filteredData.length) {
         setData(filteredData);
       }
