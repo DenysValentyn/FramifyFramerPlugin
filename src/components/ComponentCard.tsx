@@ -27,7 +27,7 @@ const ComponentCard = ({ image, url, title }: ComponentCardProps) => {
             <div className="absolute inset-0 transition-all duration-200 bg-black bg-opacity-0 rounded-lg group-hover:bg-opacity-5" />
           </div>
         </div>
-        <span className="text-[12px] mt-2">{title}</span>
+        <span className="text-[14px] mt-2">{title}</span>
       </div>
     </Draggable>
   );

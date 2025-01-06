@@ -1,5 +1,6 @@
 import { framer } from "framer-plugin";
 import { useState, useEffect } from "react";
+import { AppProvider } from "./AppContext";
 import { LoginModal } from "./components/LoginModal";
 import SearchBar from "./components/SearchBar";
 import FilterSection from "./components/FilterSection";
@@ -39,7 +40,7 @@ interface JsonData {
   Sections: Section[];
   Websites: Section[];
   Components: Section[];
-  StarterPages: Section[];
+  Pages: Section[];
 }
 
 export type CategoryKey = keyof JsonData;
@@ -115,8 +116,9 @@ export function App() {
   }, [category]);
 
   return (
-    <main>
-      {/* <p>
+    <AppProvider>
+      <main>
+        {/* <p>
                 Welcome! Check out the{" "}
                 <a href="https://framer.com/developers/plugins/introduction" target="_blank">
                     Docs
@@ -126,29 +128,30 @@ export function App() {
             <button className="framer-button-primary" onClick={handleAddSvg}>
                 Insert Logo
             </button> */}
-      <div className="min-h-screen">
-        {valid ? (
-          <>
-            <div className="fixed top-0 z-10 framer-bg">
-              <div className="flex flex-col justify-between pb-2.5 border-b border-solid framer-border">
-                <SearchBar setSearchKey={setSearchKey} category={category} />
-                <FilterSection
-                  setCategory={setCategory}
-                  setSubCategory={setSubCategory}
-                  subCategories={subCategories}
-                />
+        <div className="min-h-screen">
+          {valid ? (
+            <>
+              <div className="fixed top-0 z-10 framer-bg">
+                <div className="flex flex-col justify-between pb-2.5 border-b border-solid framer-border">
+                  <SearchBar setSearchKey={setSearchKey} category={category} />
+                  <FilterSection
+                    setCategory={setCategory}
+                    setSubCategory={setSubCategory}
+                    subCategories={subCategories}
+                  />
+                </div>
               </div>
-            </div>
 
-            <div style={{ paddingTop: "90px" }}>
-              {" "}
-              <ComponentGrid data={data} category={category} />
-            </div>
-          </>
-        ) : (
-          <LoginModal setValid={setValid} />
-        )}
-      </div>
-    </main>
+              <div style={{ paddingTop: "90px" }}>
+                {" "}
+                <ComponentGrid data={data} category={category} />
+              </div>
+            </>
+          ) : (
+            <LoginModal setValid={setValid} />
+          )}
+        </div>
+      </main>
+    </AppProvider>
   );
 }

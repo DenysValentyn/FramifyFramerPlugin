@@ -108,10 +108,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({ setValid }) => {
           <div className="w-full mt-[40px]">
             <div className="mb-2.5">
               <input
-                type="text"
+                type="email"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
-                placeholder="MarkWilliams@framify.com"
+                placeholder="Email address"
                 className="w-[290px] h-[34px] px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#989799] focus:border-transparent"
               />
             </div>

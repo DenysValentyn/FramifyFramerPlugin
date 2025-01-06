@@ -6,6 +6,7 @@ import {
   ChevronDown,
   LayersIcon,
 } from "lucide-react";
+import { useAppContext } from "../AppContext";
 import { CategoryKey } from "../App";
 
 interface FilterSectionProps {
@@ -19,8 +20,14 @@ const FilterSection: React.FC<FilterSectionProps> = ({
   setSubCategory,
   setCategory,
 }) => {
-  const [isSectionsOpen, setSectionsOpen] = useState<boolean>(false);
-  const [isFilterOpen, setFilterOpen] = useState<boolean>(false);
+  const {
+    isFilterOpen,
+    setFilterOpen,
+    isMenuOpen,
+    setMenuOpen,
+    isSectionsOpen,
+    setSectionsOpen,
+  } = useAppContext();
   const [selectedfilter, setFilterCaption] = useState<string>("Sections");
   const [slectedCategory, setSelectedCategory] =
     useState<string>("Select Subcategory");
@@ -30,14 +37,14 @@ const FilterSection: React.FC<FilterSectionProps> = ({
     "Sections",
     "Components",
     "Websites",
-    "StarterPages",
+    "Pages",
   ];
 
   const iconMapping: { [key: string]: JSX.Element } = {
     Sections: <Columns2 className="w-3 h-4 mr-[5px]" />,
     Components: <LayoutGrid className="w-3 h-4 mr-[5px]" />,
     Websites: <PanelsTopLeft className="w-3 h-4 mr-[5px]" />,
-    StarterPages: <LayersIcon className="w-3 h-4 mr-[5px]" />,
+    Pages: <LayersIcon className="w-3 h-4 mr-[5px]" />,
   };
   // Close dropdowns on outside click
   useEffect(() => {
@@ -76,6 +83,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
     );
     setFilterOpen(true);
     setSectionsOpen(false); // Close dropdown after selection
+    setMenuOpen(false);
   };
 
   const handleCategoryClick = (category: CategoryKey) => {
@@ -92,6 +100,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
           onClick={() => {
             setFilterOpen(!isFilterOpen);
             setSectionsOpen(false);
+            setMenuOpen(false);
           }}
         >
           <button
@@ -112,11 +121,11 @@ const FilterSection: React.FC<FilterSectionProps> = ({
             } `}
             ref={filterRef}
           >
-            <ul className="w-[130px] py-2 h-fit">
+            <ul className="w-[130px] h-fit">
               {FilterCategories.map((item, index) => (
                 <li
                   key={index}
-                  className="flex px-2 py-2 cursor-pointer framer-hover"
+                  className="flex m-[3px] rounded-[5px] px-2 py-2 cursor-pointer framer-hover"
                   onClick={() => handleCategoryClick(item)}
                 >
                   {iconMapping[item]}
@@ -131,6 +140,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
           onClick={() => {
             setFilterOpen(false);
             setSectionsOpen(!isSectionsOpen);
+            setMenuOpen(false);
           }}
         >
           <button
@@ -142,18 +152,18 @@ const FilterSection: React.FC<FilterSectionProps> = ({
           </button>
           {/* Dropdown for subcategories */}
           <div
-            className={`absolute h-[194px] animblock overflow-y-scroll framer-bg framer-border rounded mt-1 z-10 shadow-md ${
+            className={`absolute h-[194px] max-h-fit animblock overflow-y-scroll framer-bg framer-border rounded mt-1 z-10 shadow-md ${
               isSectionsOpen ? "open" : ""
             }`}
             style={{
               scrollbarWidth: "none",
             }}
           >
-            <ul className={`py-2 w-[194px] `}>
+            <ul className={`w-[194px]`}>
               {subCategories.map((category, index) => (
                 <li
                   key={index}
-                  className="flex px-2.5 py-2 cursor-pointer framer-hover"
+                  className="flex m-[3px] rounded-[5px] px-2.5 py-2 cursor-pointer framer-hover"
                   onClick={() => handleSubcategoryClick(category)}
                 >
                   <span className="text-2.5">

@@ -1,15 +1,19 @@
 import { Search, Menu, X } from "lucide-react"; // Import X for the close icon
-import { useState, ChangeEvent } from "react";
+import { ChangeEvent } from "react";
+import { useAppContext } from "../AppContext";
 
 interface SearchBarProps {
   category: string;
   setSearchKey: (searchKey: string) => void;
 }
 const SearchBar: React.FC<SearchBarProps> = ({ setSearchKey, category }) => {
-  const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const { isMenuOpen, setMenuOpen, setFilterOpen, setSectionsOpen } =
+    useAppContext();
 
   const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen);
+    setMenuOpen(!isMenuOpen);
+    setFilterOpen(false);
+    setSectionsOpen(false);
   };
 
   const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,13 +38,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchKey, category }) => {
         >
           <X
             className={`absolute transition-transform duration-500 w-[15px] ${
-              isDropdownOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"
+              isMenuOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"
             }`}
             style={{ width: "20px", height: "100%" }} // Ensures full width and height
           />
           <Menu
             className={`absolute transition-transform duration-500 ${
-              isDropdownOpen ? "scale-0 opacity-0" : "scale-100 opacity-100"
+              isMenuOpen ? "scale-0 opacity-0" : "scale-100 opacity-100"
             }`}
             style={{ width: "20px", height: "100%" }} // Ensures full width and height
           />
@@ -49,7 +53,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchKey, category }) => {
 
       <div
         className={`absolute h-fit animblock right-0 z-10 w-48 shadow-lg framer-bg framer-bg framer-border rounded mt-1 ${
-          isDropdownOpen ? "open" : ""
+          isMenuOpen ? "open" : ""
         }`}
       >
         <ul className="py-2">

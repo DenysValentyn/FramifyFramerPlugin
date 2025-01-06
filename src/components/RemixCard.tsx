@@ -24,7 +24,7 @@ const RemixCard = ({ image, url, title }: RemixCardProps) => {
           </div>
         </div>
         <div className="flex items-center justify-between mt-2">
-          <span className="text-[12px]">{title}</span>
+          <span className="text-[14px]">{title}</span>
           <button
             className={`flex w-[79px] secondary-background justify-between items-center px-2.5 h-[31px] mr-[5px] transition-all duration-250 ease-in-out transform border border-solid framer-secondary-border rounded-md
             }`}
