@@ -6,6 +6,7 @@ import { useAppContext } from "../AppContext";
 interface SearchBarProps {
   category: string;
   setSearchKey: (searchKey: string) => void;
+  setValid: (valid: boolean) => void;
 }
 
 const iconMapping: { [key: string]: JSX.Element } = {
@@ -16,7 +17,7 @@ const iconMapping: { [key: string]: JSX.Element } = {
   Logout: <LogOut className="w-3 h-4 mr-[5px]" />,
 };
 
-const SearchBar: React.FC<SearchBarProps> = ({ setSearchKey, category }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ setSearchKey, category, setValid }) => {
   const { isMenuOpen, setMenuOpen, setFilterOpen, setSectionsOpen } =
     useAppContext();
 
@@ -37,6 +38,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearchKey, category }) => {
   const handleSignOut = () => {
     setMenuOpen(false);
     localStorage.removeItem("loginData");
+    setValid(false);
   };
 
   return (

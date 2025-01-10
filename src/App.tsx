@@ -143,7 +143,7 @@ export function App() {
             <>
               <div className="fixed top-0 z-10 framer-bg">
                 <div className="flex flex-col justify-between pb-2.5 border-b border-solid framer-border">
-                  <SearchBar setSearchKey={setSearchKey} category={category} />
+                  <SearchBar setValid={setValid}  setSearchKey={setSearchKey} category={category} />
                   <FilterSection
                     setCategory={setCategory}
                     setSubCategory={setSubCategory}
