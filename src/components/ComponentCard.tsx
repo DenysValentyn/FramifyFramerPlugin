@@ -20,6 +20,7 @@ const ComponentCard = ({ image, url, title }: ComponentCardProps) => {
         <div className="flex flex-col border framer-border secondary-background rounded-[8px] mb-[8px]">
           <div className="relative cursor-pointer group">
             <img
+              loading="lazy"
               src={image}
               alt="Component Preview"
               className="w-full h-auto object-contain rounded-[10px] p-[5px]"

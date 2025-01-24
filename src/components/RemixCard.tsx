@@ -16,6 +16,7 @@ const RemixCard = ({ image, url, title }: RemixCardProps) => {
         <div className="flex flex-col border framer-border secondary-background rounded-[8px] mb-[8px]">
           <div className="relative group">
             <img
+              loading="lazy"
               src={image}
               alt="Component Preview"
               className="w-full h-[300px] aspect-video object-cover object-top rounded-[10px] p-[5px]"
